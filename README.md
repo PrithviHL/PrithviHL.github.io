@@ -18,6 +18,10 @@ systems, RAG and observability tools, and medical AI.
   dialogs with animated flows (deep links like `#project/spanscope`), timeline,
   draggable skills sphere, scroll reveals.
 
+- `voice/`: live TinyML demo. The ESP32 keyword-spotting model compiled to
+  WebAssembly, with microphone capture, speech detection and an OLED-style
+  readout. See `voice/model/README.md` for how the model was built.
+
 No build step and no dependencies to install: Three.js loads from a CDN, pinned
 to a fixed version. Respects `prefers-reduced-motion`, and falls back to a
 static gradient without WebGL.

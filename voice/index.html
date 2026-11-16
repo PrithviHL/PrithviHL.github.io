@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TinyML Voice Commands · Live demo · Prithvi</title>
+    <meta
+      name="description"
+      content="Talk to my ESP32 TinyML model: the same keyword-spotting network that runs on a microcontroller, compiled to WebAssembly and running in your browser."
+    />
+    <meta name="theme-color" content="#05070f" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23ff5c8a'/%3E%3Cpath d='M16 7a4 4 0 0 0-4 4v5a4 4 0 0 0 8 0v-5a4 4 0 0 0-4-4zM9 15a7 7 0 0 0 14 0M16 22v4' stroke='white' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="voice.css" />
+  </head>
+  <body>
+    <div class="bg" aria-hidden="true"></div>
+
+    <header class="top">
+      <a class="back" href="../#project/tinyml">← Portfolio</a>
+      <span class="top-title">TinyML Voice · live demo</span>
+      <a class="back" href="https://github.com/PrithviHL/Real-Time-Voice-Command-Recognition-on-ESP32" target="_blank" rel="noopener">Code ↗</a>
+    </header>
+
+    <main class="wrap">
+      <section class="intro">
+        <p class="eyebrow">Edge AI · runs on your device</p>
+        <h1>Talk to my <span class="grad">ESP32 model</span>.</h1>
+        <p class="lead">
+          Say <b>up</b>, <b>down</b>, <b>left</b>, <b>right</b>, <b>on</b> or <b>off</b>. The same keyword-spotting
+          network that runs on a $5 microcontroller runs here, compiled to WebAssembly. Your audio never leaves your
+          browser.
+        </p>
+      </section>
+
+      <section class="stage">
+        <!-- the "device" -->
+        <div class="device">
+          <div class="board">
+            <div class="board-label">ESP32 · DevKit</div>
+            <div class="oled" id="oled" aria-live="polite">
+              <div class="oled-top"><span>PREDICTION</span><span id="oled-state">IDLE</span></div>
+              <div class="oled-word" id="oled-word">--</div>
+              <div class="oled-bottom"><span id="oled-conf">conf --</span><span id="oled-time">-- ms</span></div>
+              <div class="scan" aria-hidden="true"></div>
+            </div>
+            <div class="pins" aria-hidden="true"></div>
+            <div class="chip-row" aria-hidden="true">
+              <span class="led" id="led"></span>
+              <span class="mic-chip">INMP441</span>
+            </div>
+          </div>
+
+          <button class="mic-btn" id="mic-btn" type="button">
+            <span class="mic-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <rect x="9" y="3" width="6" height="11" rx="3" /><path d="M5 11a7 7 0 0 0 14 0M12 18v3" />
+              </svg>
+            </span>
+            <span id="mic-label">Start listening</span>
+          </button>
+          <p class="status" id="status">Loading the model…</p>
+          <div class="meter" aria-hidden="true"><span id="meter"></span></div>
+        </div>
+
+        <!-- live panels -->
+        <div class="panels">
+          <div class="panel">
+            <div class="panel-head"><h2>Microphone</h2><span class="hint" id="wave-hint">1 s window the model sees is highlighted</span></div>
+            <canvas id="wave" height="120" aria-label="Live microphone waveform"></canvas>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head"><h2>Model output</h2><span class="hint">probability per command</span></div>
+            <div class="bars" id="bars"></div>
+          </div>
+
+          <div class="panel playground-panel">
+            <div class="panel-head"><h2>Robot playground</h2><span class="hint">up / down / left / right move it · on / off power it</span></div>
+            <div class="playground" id="playground"><div class="bot on" id="bot"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="history-wrap">
+        <h2 class="section-h">Recent commands</h2>
+        <ol class="history" id="history"><li class="empty">Nothing yet. Press <b>Start listening</b> and say a command.</li></ol>
+      </section>
+
+      <section class="how">
+        <h2 class="section-h">How it works</h2>
+        <ol class="flow">
+          <li><b>Microphone</b><span>16 kHz mono, like the INMP441 over I²S</span></li>
+          <li><b>Speech detection</b><span>waits for a word, centres a 1 s window</span></li>
+          <li><b>MFCC features</b><span>13 coefficients × 66 frames</span></li>
+          <li><b>int8 neural network</b><span>Edge Impulse EON-compiled</span></li>
+          <li><b>Command</b><span>shown on the "OLED", drives the robot</span></li>
+        </ol>
+        <div class="facts">
+          <div><b>105 KB</b><span>model + DSP as WebAssembly</span></div>
+          <div><b id="fact-ms">– ms</b><span>per prediction in your browser</span></div>
+          <div><b>6</b><span>commands it knows</span></div>
+          <div><b>0 bytes</b><span>of audio uploaded</span></div>
+        </div>
+        <p class="note">
+          This is the exact C++ from the ESP32 build (MFCC preprocessing, TensorFlow Lite Micro kernels and the trained
+          int8 model), compiled with Emscripten. The model was trained on the six command words only, so it works best
+          with one short word at a time in a quiet room. Speech detection keeps silence and background noise from being
+          classified.
+        </p>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <a href="../">prithvihl.github.io</a>
+      <span>Model: Edge Impulse SDK (Clear BSD) + TensorFlow Lite Micro (Apache 2.0)</span>
+    </footer>
+
+    <script type="module" src="voice.js"></script>
+  </body>
+</html>

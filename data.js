@@ -20,7 +20,7 @@ export const PROFILE = {
   stats: [
     { value: 94, suffix: "%", label: "accuracy detecting heart conditions" },
     { value: 120, suffix: "+", label: "Salesforce test workflows automated" },
-    { value: 3, suffix: "", label: "live apps you can try today" },
+    { value: 4, suffix: "", label: "live apps you can try today" },
   ],
   links: {
     linkedin: "https://www.linkedin.com/in/prithvihl/",
@@ -228,11 +228,12 @@ export const PROJECTS = [
     summary:
       "On-device voice command recognition on an ESP32 microcontroller, with the result shown live on an OLED screen.",
     details:
-      "A model trained in Edge Impulse on one-second, 16 kHz audio clips runs entirely on the ESP32. An INMP441 microphone streams audio over I²S, and the predicted command appears in real time on a 128×64 SH1106 OLED display.",
+      "A model trained in Edge Impulse on one-second, 16 kHz audio clips runs entirely on the ESP32. An INMP441 microphone streams audio over I²S, and the predicted command appears in real time on a 128×64 SH1106 OLED display. For the live demo, the same C++ (MFCC preprocessing, TensorFlow Lite Micro kernels and the int8 model) is compiled to WebAssembly, so it runs in your browser and your audio never leaves your device.",
     highlights: [
       "Fully on-device inference, no cloud round trip",
       "I²S microphone streaming at 16 kHz",
       "Real-time OLED readout with U8g2",
+      "Browser demo: the same model compiled to 105 KB of WebAssembly",
     ],
     metrics: [
       { value: "16 kHz", label: "audio sampling" },
@@ -242,6 +243,7 @@ export const PROJECTS = [
     stack: ["C++", "Edge Impulse", "TinyML", "ESP32", "I²S"],
     flow: ["INMP441 mic", "1 s audio window", "Edge Impulse model", "ESP32 inference", "OLED readout"],
     links: {
+      demo: "voice/",
       video: "https://drive.google.com/drive/folders/1DJyjVCoRY8r977VBq4hr7fjYT17MtLwN?usp=sharing",
       code: "https://github.com/PrithviHL/Real-Time-Voice-Command-Recognition-on-ESP32",
     },
