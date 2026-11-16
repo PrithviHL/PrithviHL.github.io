@@ -178,30 +178,6 @@ export const PROJECTS = [
     links: {},
   },
   {
-    id: "codesearch",
-    title: "Cross-Repo Semantic Code Search",
-    category: "llm",
-    accent: "#7fb2ff",
-    tagline: "Search that understands code",
-    summary:
-      "Hybrid retrieval across multiple codebases using a code knowledge graph, sparse and dense search, and reranking.",
-    details:
-      "Builds a Neo4j knowledge graph of code entities across repositories, then combines BM25F and dense retrieval with cross-encoder reranking to find the right function or file for a natural-language query.",
-    highlights: [
-      "Neo4j code knowledge graph across repositories",
-      "BM25F + dense retrieval fused, then cross-encoder reranked",
-      "Served through a FastAPI search API",
-    ],
-    metrics: [
-      { value: "0.83", label: "MRR@10 (from 0.61)" },
-      { value: "+36%", label: "ranking quality" },
-      { value: "multi", label: "repository index" },
-    ],
-    stack: ["Python", "Neo4j", "Transformers", "FastAPI"],
-    flow: ["Repositories", "Code knowledge graph", "BM25F + dense", "Cross-encoder", "Ranked results"],
-    links: {},
-  },
-  {
     id: "mri",
     title: "MRI Super-Resolution",
     category: "medical",
