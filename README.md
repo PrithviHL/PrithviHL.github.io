@@ -34,3 +34,7 @@ python3 -m http.server 8000
 
 Then open http://localhost:8000. (Opening `index.html` directly won't work,
 because browsers block ES modules from `file://`.)
+
+## Project descriptions updated — November 16, 2026
+
+LeaveNow reflects Gainesville RTS, direct-first trip recommendations, direction-verified live buses, address/GPS input, GTFS route shapes, and its current deployed branch. CodeAtlas distinguishes the hosted Groq app from the local experimental LangGraph engine and labels its development pilot. Existing design, contact details, other project entries, and the TinyML voice demo are preserved.
