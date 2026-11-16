@@ -39,31 +39,31 @@ export const CATEGORIES = [
 
 export const PROJECTS = [
   {
-    id: "spanscope",
-    title: "Spanscope",
-    category: "llm",
-    accent: "#4c8dff",
-    tagline: "Live observability for LLM apps",
+    id: "leavenow",
+    title: "LeaveNow",
+    category: "systems",
+    accent: "#ff9f43",
+    tagline: "Your next bus, figured out",
     summary:
-      "Ingests OpenTelemetry GenAI traces and shows latency, errors and cost per model in real time, with a one-click incident simulator.",
+      "A Rochester RTS trip planner that combines published timetables with live predictions, including journeys with one transfer.",
     details:
-      "A self-hosted dashboard for teams running LLM features. Any OpenTelemetry SDK can send traces to it; it validates and prices every call, then serves a live overview, a trace explorer and per-model comparisons. Storage is pluggable: an in-memory ring buffer for the free demo, or ClickHouse, where the analytics run as SQL. CI checks both backends return identical numbers.",
+      "Pick a start and destination and LeaveNow tells you when to leave. It plans direct journeys and trips with one transfer from the official GTFS schedules, adds walking estimates and connection buffers, and labels every time as live, scheduled or both, with timelines and maps. Credentials stay server-side behind a private API inside the Docker service.",
     highlights: [
-      "OTLP/HTTP JSON ingest with validation and per-IP rate limiting",
-      "Optional ClickHouse storage with day partitions, TTL and SQL percentiles",
-      "Stateless Sign in with GitHub and personal ingest keys (off on the demo)",
-      "Dependency-free front end: SVG charts, command palette, live stream",
+      "Leave now, depart at and arrive by planning",
+      "Direct and one-transfer journeys from official GTFS data",
+      "Live / scheduled source labels on every time",
+      "Google sign-in; private Node API inside one Docker service",
     ],
     metrics: [
-      { value: "58", label: "automated tests" },
-      { value: "3.8×", label: "ClickHouse compression" },
-      { value: "5 s", label: "live refresh" },
+      { value: "≤1", label: "transfer routing" },
+      { value: "3", label: "trip modes" },
+      { value: "GTFS", label: "official schedules" },
     ],
-    stack: ["TypeScript", "Hono", "ClickHouse", "OpenTelemetry", "Docker", "Render"],
-    flow: ["LLM app + OTel SDK", "/v1/traces ingest", "Validate & price", "Memory or ClickHouse", "Live dashboard"],
+    stack: ["Python", "Streamlit", "Node.js", "GTFS", "Docker", "Render"],
+    flow: ["RTS GTFS + live feed", "Private Node API", "Routing engine", "Streamlit UI", "When to leave"],
     links: {
-      demo: "https://spanscope-llm-observability-dashboard.onrender.com/",
-      code: "https://github.com/PrithviHL/Spanscope-LLM-observability-dashboard",
+      demo: "https://leavenow-prithvihl.onrender.com",
+      code: "https://github.com/PrithviHL/LeaveNow-Real-Time-Bus-Location-Tracking-and-Smart-Departure-Prediction",
     },
   },
   {
@@ -95,6 +95,64 @@ export const PROJECTS = [
     },
   },
   {
+    id: "spanscope",
+    title: "Spanscope",
+    category: "llm",
+    accent: "#4c8dff",
+    tagline: "Live observability for LLM apps",
+    summary:
+      "Ingests OpenTelemetry GenAI traces and shows latency, errors and cost per model in real time, with a one-click incident simulator.",
+    details:
+      "A self-hosted dashboard for teams running LLM features. Any OpenTelemetry SDK can send traces to it; it validates and prices every call, then serves a live overview, a trace explorer and per-model comparisons. Storage is pluggable: an in-memory ring buffer for the free demo, or ClickHouse, where the analytics run as SQL. CI checks both backends return identical numbers.",
+    highlights: [
+      "OTLP/HTTP JSON ingest with validation and per-IP rate limiting",
+      "Optional ClickHouse storage with day partitions, TTL and SQL percentiles",
+      "Stateless Sign in with GitHub and personal ingest keys (off on the demo)",
+      "Dependency-free front end: SVG charts, command palette, live stream",
+    ],
+    metrics: [
+      { value: "58", label: "automated tests" },
+      { value: "3.8×", label: "ClickHouse compression" },
+      { value: "5 s", label: "live refresh" },
+    ],
+    stack: ["TypeScript", "Hono", "ClickHouse", "OpenTelemetry", "Docker", "Render"],
+    flow: ["LLM app + OTel SDK", "/v1/traces ingest", "Validate & price", "Memory or ClickHouse", "Live dashboard"],
+    links: {
+      demo: "https://spanscope-llm-observability-dashboard.onrender.com/",
+      code: "https://github.com/PrithviHL/Spanscope-LLM-observability-dashboard",
+    },
+  },
+  {
+    id: "tinyml",
+    title: "SayWatt",
+    category: "systems",
+    accent: "#ff5c8a",
+    tagline: "Say it. It switches. Offline voice control on a $5 chip",
+    note: "I know this isn't a complex or a really cool project, but it is a simple solution for an offline command system that you can incorporate in your house to turn off lights, open and close blinds and similar actions without an internet connection.",
+    summary:
+      "Offline voice commands for the home: 26 spoken commands recognised on a $5 ESP32 to switch lights, open blinds and more, with no internet.",
+    details:
+      "A 28-class keyword model (26 commands plus noise and unknown) runs entirely on the ESP32, listening continuously through an INMP441 I²S microphone and showing results on an SH1106 OLED. It was trained in Edge Impulse on Google's Speech Commands dataset plus synthetic voices for “turn on”, “turn off”, “open” and “close”. The live demo runs the same C++ (MFCC, TensorFlow Lite Micro kernels, int8 model) compiled to WebAssembly, so your audio never leaves your device.",
+    highlights: [
+      "26 commands: lights (on/off, brightness 1–9), blinds, robot moves, yes/no",
+      "noise and unknown classes so silence and other words don't trigger actions",
+      "Continuous listening with averaged, shifted windows for robust detection",
+      "Same model in the browser: 119 KB of WebAssembly, ~8 ms per word",
+    ],
+    metrics: [
+      { value: "74%", label: "accuracy, 28 classes, unseen speakers" },
+      { value: "12 ms", label: "per inference on the ESP32" },
+      { value: "72 KB", label: "flash · 22 KB RAM" },
+    ],
+    stack: ["C++", "Edge Impulse", "TinyML", "ESP32", "WebAssembly", "Speech Commands"],
+    flow: ["INMP441 mic", "250 ms slices", "MFCC 13×66", "int8 CNN, 28 classes", "Light · blinds · OLED"],
+    links: {
+      demo: "voice/",
+      video: "https://drive.google.com/drive/folders/1DJyjVCoRY8r977VBq4hr7fjYT17MtLwN?usp=sharing",
+      code: "https://github.com/PrithviHL/SayWatt-Real-Time-Voice-Command-Recognition-on-ESP32",
+    },
+  },
+  {
     id: "beatnet",
     title: "BeatNet ECG Pipeline",
     category: "medical",
@@ -118,34 +176,6 @@ export const PROJECTS = [
     stack: ["PyTorch", "TensorFlow Lite", "1D U-Net", "ECG-FM", "MIT-BIH", "SageMaker"],
     flow: ["Single-lead ECG", "Filter & segment", "1D U-Net fiducials", "Arrhythmia classifier", "TFLite · SageMaker"],
     links: {},
-  },
-  {
-    id: "leavenow",
-    title: "LeaveNow",
-    category: "systems",
-    accent: "#ff9f43",
-    tagline: "Your next bus, figured out",
-    summary:
-      "A Rochester RTS trip planner that combines published timetables with live predictions, including journeys with one transfer.",
-    details:
-      "Pick a start and destination and LeaveNow tells you when to leave. It plans direct journeys and trips with one transfer from the official GTFS schedules, adds walking estimates and connection buffers, and labels every time as live, scheduled or both, with timelines and maps. Credentials stay server-side behind a private API inside the Docker service.",
-    highlights: [
-      "Leave now, depart at and arrive by planning",
-      "Direct and one-transfer journeys from official GTFS data",
-      "Live / scheduled source labels on every time",
-      "Google sign-in; private Node API inside one Docker service",
-    ],
-    metrics: [
-      { value: "≤1", label: "transfer routing" },
-      { value: "3", label: "trip modes" },
-      { value: "GTFS", label: "official schedules" },
-    ],
-    stack: ["Python", "Streamlit", "Node.js", "GTFS", "Docker", "Render"],
-    flow: ["RTS GTFS + live feed", "Private Node API", "Routing engine", "Streamlit UI", "When to leave"],
-    links: {
-      demo: "https://leavenow-prithvihl.onrender.com",
-      code: "https://github.com/PrithviHL/LeaveNow-Real-Time-Bus-Location-Tracking-and-Smart-Departure-Prediction",
-    },
   },
   {
     id: "codesearch",
@@ -218,36 +248,6 @@ export const PROJECTS = [
     stack: ["PyTorch", "Transformers"],
     flow: ["Radiology image", "Vision encoder", "Question encoder", "Adaptive fusion", "Answer"],
     links: {},
-  },
-  {
-    id: "tinyml",
-    title: "SayWatt",
-    category: "systems",
-    accent: "#ff5c8a",
-    tagline: "Say it. It switches. Offline voice control on a $5 chip",
-    note: "I know this isn't a complex or a really cool project, but it is a simple solution for an offline command system that you can incorporate in your house to turn off lights, open and close blinds and similar actions without an internet connection.",
-    summary:
-      "Offline voice commands for the home: 26 spoken commands recognised on a $5 ESP32 to switch lights, open blinds and more, with no internet.",
-    details:
-      "A 28-class keyword model (26 commands plus noise and unknown) runs entirely on the ESP32, listening continuously through an INMP441 I²S microphone and showing results on an SH1106 OLED. It was trained in Edge Impulse on Google's Speech Commands dataset plus synthetic voices for “turn on”, “turn off”, “open” and “close”. The live demo runs the same C++ (MFCC, TensorFlow Lite Micro kernels, int8 model) compiled to WebAssembly, so your audio never leaves your device.",
-    highlights: [
-      "26 commands: lights (on/off, brightness 1–9), blinds, robot moves, yes/no",
-      "noise and unknown classes so silence and other words don't trigger actions",
-      "Continuous listening with averaged, shifted windows for robust detection",
-      "Same model in the browser: 119 KB of WebAssembly, ~8 ms per word",
-    ],
-    metrics: [
-      { value: "74%", label: "accuracy, 28 classes, unseen speakers" },
-      { value: "12 ms", label: "per inference on the ESP32" },
-      { value: "72 KB", label: "flash · 22 KB RAM" },
-    ],
-    stack: ["C++", "Edge Impulse", "TinyML", "ESP32", "WebAssembly", "Speech Commands"],
-    flow: ["INMP441 mic", "250 ms slices", "MFCC 13×66", "int8 CNN, 28 classes", "Light · blinds · OLED"],
-    links: {
-      demo: "voice/",
-      video: "https://drive.google.com/drive/folders/1DJyjVCoRY8r977VBq4hr7fjYT17MtLwN?usp=sharing",
-      code: "https://github.com/PrithviHL/SayWatt-Real-Time-Voice-Command-Recognition-on-ESP32",
-    },
   },
   {
     id: "mesh",

@@ -8,13 +8,13 @@ systems, RAG and observability tools, and medical AI.
 ## What's here
 
 - `index.html`, `styles.css`: page structure and styles.
-- `data.js`: **all content**: profile, projects (with case-study details,
+- `data.js`: **all content**: profile, projects (with project details,
   metrics and architecture flow), journey, skills, certifications. Edit this
   file to update the site.
 - `scene.js`: the WebGL background. About 5,000 particles (2,200 on phones)
   morph between a neural sphere, a heart, a DNA helix, a signal wave, a spiral
   galaxy and a torus knot as you scroll, with an ECG-style pulse.
-- `main.js`: interactions: hero intro, project filters, 3D card tilt, case-study
+- `main.js`: interactions: hero intro, project filters, 3D card tilt, project detail
   dialogs with animated flows (deep links like `#project/spanscope`), timeline,
   draggable skills sphere, scroll reveals.
 

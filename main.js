@@ -121,7 +121,7 @@ $("#filters").innerHTML = CATEGORIES.map((c) => {
 
 $("#project-grid").innerHTML = PROJECTS.map(
   (p, i) => `
-  <button class="pcard" data-id="${p.id}" data-cat="${p.category}" style="--accent:${p.accent};--d:${i % 3}" data-reveal aria-label="Open ${esc(p.title)} case study">
+  <button class="pcard" data-id="${p.id}" data-cat="${p.category}" style="--accent:${p.accent};--d:${i % 3}" data-reveal aria-label="Open ${esc(p.title)} project details">
     <div class="pcard-top">
       <span class="pcard-icon">${esc(initials(p.title))}</span>
       <span class="badge${isLive(p) ? " live" : ""}">${isLive(p) ? "Live demo" : esc(CATEGORIES.find((c) => c.id === p.category).label)}</span>
@@ -133,7 +133,7 @@ $("#project-grid").innerHTML = PROJECTS.map(
       .slice(0, 4)
       .map((s) => `<span class="chip">${esc(s)}</span>`)
       .join("")}</div>
-    <span class="open">View case study <i>→</i></span>
+    <span class="open">View project <i>→</i></span>
   </button>`,
 ).join("");
 
@@ -179,7 +179,7 @@ $$(".pcard").forEach((c) => addTilt(c, 9));
 $$("[data-tilt]").forEach((c) => addTilt(c, 7));
 
 // ---------------------------------------------------------------------------
-// case study modal
+// project details modal
 // ---------------------------------------------------------------------------
 const modal = $("#modal");
 const panel = $("#modal-panel");
