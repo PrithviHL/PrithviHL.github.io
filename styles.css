@@ -831,6 +831,16 @@ main,
   max-width: 70ch;
   margin: 0;
 }
+.m-note {
+  margin: 18px 0 0;
+  padding: 14px 18px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 14px 14px 0;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ink-2);
+  font-style: italic;
+  max-width: 70ch;
+}
 .m-links {
   display: flex;
   gap: 10px;

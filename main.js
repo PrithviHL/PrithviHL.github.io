@@ -251,6 +251,7 @@ function openProject(id, push = true) {
       <p class="tagline">${esc(p.tagline)}</p>
       <h2 id="modal-title">${esc(p.title)}</h2>
       <p>${esc(p.details)}</p>
+      ${p.note ? `<blockquote class="m-note">${esc(p.note)}</blockquote>` : ""}
       <div class="m-links">${linkButtons(p)}</div>
     </header>
     <section class="m-section">
