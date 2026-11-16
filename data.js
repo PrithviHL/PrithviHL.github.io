@@ -227,22 +227,22 @@ export const PROJECTS = [
     tagline: "Say it. It switches. Offline voice control on a $5 chip",
     note: "I know this isn't a complex or a really cool project, but it is a simple solution for an offline command system that you can incorporate in your house to turn off lights, open and close blinds and similar actions without an internet connection.",
     summary:
-      "On-device voice command recognition on an ESP32 microcontroller, with the result shown live on an OLED screen.",
+      "Offline voice commands for the home: 26 spoken commands recognised on a $5 ESP32 to switch lights, open blinds and more, with no internet.",
     details:
-      "A model trained in Edge Impulse on one-second, 16 kHz audio clips runs entirely on the ESP32. An INMP441 microphone streams audio over I²S, and the predicted command appears in real time on a 128×64 SH1106 OLED display. For the live demo, the same C++ (MFCC preprocessing, TensorFlow Lite Micro kernels and the int8 model) is compiled to WebAssembly, so it runs in your browser and your audio never leaves your device.",
+      "A 28-class keyword model (26 commands plus noise and unknown) runs entirely on the ESP32, listening continuously through an INMP441 I²S microphone and showing results on an SH1106 OLED. It was trained in Edge Impulse on Google's Speech Commands dataset plus synthetic voices for “turn on”, “turn off”, “open” and “close”. The live demo runs the same C++ (MFCC, TensorFlow Lite Micro kernels, int8 model) compiled to WebAssembly, so your audio never leaves your device.",
     highlights: [
-      "Fully on-device inference, no cloud round trip",
-      "I²S microphone streaming at 16 kHz",
-      "Real-time OLED readout with U8g2",
-      "Browser demo: the same model compiled to 105 KB of WebAssembly",
+      "26 commands: lights (on/off, brightness 1–9), blinds, robot moves, yes/no",
+      "noise and unknown classes so silence and other words don't trigger actions",
+      "Continuous listening with averaged, shifted windows for robust detection",
+      "Same model in the browser: 119 KB of WebAssembly, ~8 ms per word",
     ],
     metrics: [
-      { value: "16 kHz", label: "audio sampling" },
-      { value: "1 s", label: "inference window" },
-      { value: "0", label: "cloud calls" },
+      { value: "74%", label: "accuracy, 28 classes, unseen speakers" },
+      { value: "12 ms", label: "per inference on the ESP32" },
+      { value: "72 KB", label: "flash · 22 KB RAM" },
     ],
-    stack: ["C++", "Edge Impulse", "TinyML", "ESP32", "I²S"],
-    flow: ["INMP441 mic", "1 s audio window", "Edge Impulse model", "ESP32 inference", "OLED readout"],
+    stack: ["C++", "Edge Impulse", "TinyML", "ESP32", "WebAssembly", "Speech Commands"],
+    flow: ["INMP441 mic", "250 ms slices", "MFCC 13×66", "int8 CNN, 28 classes", "Light · blinds · OLED"],
     links: {
       demo: "voice/",
       video: "https://drive.google.com/drive/folders/1DJyjVCoRY8r977VBq4hr7fjYT17MtLwN?usp=sharing",

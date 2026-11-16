@@ -1,20 +1,24 @@
 # Voice model (WebAssembly)
 
-`voice-model.wasm` is the Edge Impulse **DL_Project-3** keyword model from
+`voice-model.wasm` is the Edge Impulse **SayWatt** keyword model (28 classes) for
 [Real-Time-Voice-Command-Recognition-on-ESP32](https://github.com/PrithviHL/Real-Time-Voice-Command-Recognition-on-ESP32),
 compiled for the browser. It contains the same C++ that runs on the ESP32: MFCC
 preprocessing (13 coefficients, 25 ms frames, 15 ms stride, 40 filters), the
 EON-compiled int8 network and the TensorFlow Lite Micro kernels.
 
 - Input: 16,000 samples (1 s at 16 kHz), int16 scale.
-- Output: probabilities for `down`, `left`, `off`, `on`, `right`, `up`.
-- The model has no silence/noise class, so `../voice.js` only classifies after
-  it detects speech, with a 1 s window centred on the word.
+- Output: probabilities for 26 commands plus `noise` and `unknown`.
+- `../voice.js` classifies after it detects speech, averaging 9 windows shifted
+  by up to ±250 ms (the model is sensitive to word position), and acts when the
+  average is >= 0.45 and the label is not `noise` / `unknown`.
+- The SayWatt export no longer ships the `clib` porting layer; copy
+  `edge-impulse-sdk/porting/clib/` from an older export (or Edge Impulse's
+  standalone SDK) into the library before building.
 
 ## Rebuild
 
 From a folder containing the unzipped Arduino library
-(`ei-dl_project-3-arduino-1.0.1.zip` → `DL_Project-3_inferencing/src`) as `lib/`,
+(`ei-saywatt-arduino-1.0.1-impulse-#1.zip` → `SayWatt_inferencing/src`) as `lib/`,
 this folder's `voice.cpp` and `build.sh` in `wasm/`, and an empty `out/`:
 
 ```bash

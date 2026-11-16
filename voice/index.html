@@ -35,10 +35,15 @@
         <p class="eyebrow">SayWatt · Edge AI · runs on your device</p>
         <h1><span class="grad">SayWatt</span>: say it, it switches.</h1>
         <p class="lead">
-          Say <b>up</b>, <b>down</b>, <b>left</b>, <b>right</b>, <b>on</b> or <b>off</b>. The same keyword-spotting
-          network that runs on a $5 microcontroller runs here, compiled to WebAssembly. Your audio never leaves your
-          browser.
+          Control a little home with your voice. The same keyword-spotting network that runs on a $5 ESP32 runs here,
+          compiled to WebAssembly. Your audio never leaves your browser.
         </p>
+        <div class="cmds" aria-label="Commands it understands">
+          <span class="grp">💡 Light</span><b>turn on</b><b>turn off</b><b>on</b><b>off</b><b>one … nine</b><b>zero</b>
+          <span class="grp">🪟 Blinds</span><b>open</b><b>close</b>
+          <span class="grp">🤖 Robot</span><b>up</b><b>down</b><b>left</b><b>right</b><b>forward</b><b>backward</b><b>stop</b><b>go</b>
+          <span class="grp">✓ Confirm</span><b>yes</b><b>no</b>
+        </div>
       </section>
 
       <blockquote class="why">“I know this isn't a complex or a really cool project, but it is a simple solution for an offline command system that you can incorporate in your house to turn off lights, open and close blinds and similar actions without an internet connection.”<span>— Prithvi</span></blockquote>
@@ -81,13 +86,26 @@
           </div>
 
           <div class="panel">
-            <div class="panel-head"><h2>Model output</h2><span class="hint">probability per command</span></div>
+            <div class="panel-head"><h2>Model output</h2><span class="hint">top 5 of 28 classes</span></div>
             <div class="bars" id="bars"></div>
           </div>
 
-          <div class="panel playground-panel">
-            <div class="panel-head"><h2>Robot playground</h2><span class="hint">up / down / left / right move it · on / off power it</span></div>
-            <div class="playground" id="playground"><div class="bot on" id="bot"></div></div>
+          <div class="panel">
+            <div class="panel-head"><h2>Smart home</h2><span class="hint" id="home-hint">try “turn on”, “open”, “five”, “left”</span></div>
+            <div class="home">
+              <div class="dev lamp" id="lamp" aria-label="Light">
+                <div class="bulb"><span></span></div>
+                <b>Light</b><small id="lamp-state">off</small>
+              </div>
+              <div class="dev blinds" id="blinds" aria-label="Blinds">
+                <div class="window"><div class="slats"></div></div>
+                <b>Blinds</b><small id="blinds-state">closed</small>
+              </div>
+              <div class="dev robot" aria-label="Robot">
+                <div class="playground" id="playground"><div class="bot on" id="bot"></div></div>
+                <b>Robot</b><small id="robot-state">ready</small>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -101,22 +119,25 @@
         <h2 class="section-h">How it works</h2>
         <ol class="flow">
           <li><b>Microphone</b><span>16 kHz mono, like the INMP441 over I²S</span></li>
-          <li><b>Speech detection</b><span>waits for a word, centres a 1 s window</span></li>
+          <li><b>Speech detection</b><span>waits for a word, then checks 9 shifted 1 s windows</span></li>
           <li><b>MFCC features</b><span>13 coefficients × 66 frames</span></li>
           <li><b>int8 neural network</b><span>Edge Impulse EON-compiled</span></li>
           <li><b>Command</b><span>shown on the "OLED", drives the robot</span></li>
         </ol>
         <div class="facts">
-          <div><b>105 KB</b><span>model + DSP as WebAssembly</span></div>
-          <div><b id="fact-ms">– ms</b><span>per prediction in your browser</span></div>
-          <div><b>6</b><span>commands it knows</span></div>
+          <div><b>119 KB</b><span>model + DSP as WebAssembly</span></div>
+          <div><b id="fact-ms">– ms</b><span>per word (9 windows) in your browser</span></div>
+          <div><b>26</b><span>commands, plus noise &amp; unknown</span></div>
           <div><b>0 bytes</b><span>of audio uploaded</span></div>
         </div>
         <p class="note">
           This is the exact C++ from the ESP32 build (MFCC preprocessing, TensorFlow Lite Micro kernels and the trained
-          int8 model), compiled with Emscripten. The model was trained on the six command words only, so it works best
-          with one short word at a time in a quiet room. Speech detection keeps silence and background noise from being
-          classified.
+          int8 model), compiled with Emscripten. It was trained in Edge Impulse on Google's Speech Commands dataset
+          (thousands of real speakers) plus synthetic voices for “turn on”, “turn off”, “open” and “close”, with extra
+          <i>noise</i> and <i>unknown</i> classes. On speakers it never heard it is 74% accurate across all 28 classes,
+          and the page looks at each word through 9 slightly shifted windows and averages them, acting only when the
+          average is confident (then it is right about 91% of the time). On the ESP32 it needs
+          12 ms, 22 KB of RAM and 72 KB of flash. Speak one command at a time; “turn on” works better than “on” alone.
         </p>
       </section>
     </main>
