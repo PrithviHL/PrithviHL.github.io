@@ -135,8 +135,9 @@
           int8 model), compiled with Emscripten. It was trained in Edge Impulse on Google's Speech Commands dataset
           (thousands of real speakers) plus synthetic voices for “turn on”, “turn off”, “open” and “close”, with extra
           <i>noise</i> and <i>unknown</i> classes. On speakers it never heard it is 74% accurate across all 28 classes,
-          and the page looks at each word through 9 slightly shifted windows and averages them, acting only when the
-          average is confident (then it is right about 91% of the time). On the ESP32 it needs
+          and the page looks at each word through 9 slightly shifted windows and averages them. It acts when the
+          average is confident or the top command clearly beats the runner-up (then it is right about 87% of the
+          time); otherwise the screen shows its best guess with a question mark. On the ESP32 it needs
           12 ms, 22 KB of RAM and 72 KB of flash. Speak one command at a time; “turn on” works better than “on” alone.
         </p>
       </section>
