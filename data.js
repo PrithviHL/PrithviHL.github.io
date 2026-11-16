@@ -114,7 +114,7 @@ export const PROJECTS = [
     metrics: [
       { value: "52.7k", label: "spans/s into ClickHouse" },
       { value: "436k", label: "spans/s in memory" },
-      { value: "88%", label: "toxicity-flag precision, held-out set" },
+      { value: "88%", label: "precision of toxicity flags, 860 unseen tweets" },
     ],
     stack: ["TypeScript", "Hono", "ClickHouse", "OpenTelemetry", "Python", "Docker", "GitHub Actions"],
     flow: ["LLM app + OTel SDK", "/v1/traces ingest", "Validate & price", "Memory or ClickHouse", "Live dashboard"],
