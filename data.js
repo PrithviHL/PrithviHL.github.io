@@ -221,10 +221,10 @@ export const PROJECTS = [
   },
   {
     id: "tinyml",
-    title: "TinyML Voice on ESP32",
+    title: "SayWatt",
     category: "systems",
     accent: "#ff5c8a",
-    tagline: "Speech recognition on a $5 chip",
+    tagline: "Say it. It switches. Offline voice control on a $5 chip",
     note: "I know this isn't a complex or a really cool project, but it is a simple solution for an offline command system that you can incorporate in your house to turn off lights, open and close blinds and similar actions without an internet connection.",
     summary:
       "On-device voice command recognition on an ESP32 microcontroller, with the result shown live on an OLED screen.",
