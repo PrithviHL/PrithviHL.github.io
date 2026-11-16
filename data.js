@@ -246,7 +246,7 @@ export const PROJECTS = [
     links: {
       demo: "voice/",
       video: "https://drive.google.com/drive/folders/1DJyjVCoRY8r977VBq4hr7fjYT17MtLwN?usp=sharing",
-      code: "https://github.com/PrithviHL/Real-Time-Voice-Command-Recognition-on-ESP32",
+      code: "https://github.com/PrithviHL/SayWatt-Real-Time-Voice-Command-Recognition-on-ESP32",
     },
   },
   {

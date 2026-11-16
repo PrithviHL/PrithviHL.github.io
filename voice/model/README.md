@@ -1,7 +1,7 @@
 # Voice model (WebAssembly)
 
 `voice-model.wasm` is the Edge Impulse **SayWatt** keyword model (28 classes) for
-[Real-Time-Voice-Command-Recognition-on-ESP32](https://github.com/PrithviHL/Real-Time-Voice-Command-Recognition-on-ESP32),
+[SayWatt-Real-Time-Voice-Command-Recognition-on-ESP32](https://github.com/PrithviHL/SayWatt-Real-Time-Voice-Command-Recognition-on-ESP32),
 compiled for the browser. It contains the same C++ that runs on the ESP32: MFCC
 preprocessing (13 coefficients, 25 ms frames, 15 ms stride, 40 filters), the
 EON-compiled int8 network and the TensorFlow Lite Micro kernels.
