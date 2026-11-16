@@ -1,6 +1,6 @@
 # prithvihl.github.io
 
-Personal portfolio of **Prithvi Halagere Lokesha**: AI/ML engineer building LLM
+Personal portfolio of **Prithvi**: AI/ML engineer building LLM
 systems, RAG and observability tools, and medical AI.
 
 **Live site:** https://prithvihl.github.io

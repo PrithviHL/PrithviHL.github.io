@@ -351,7 +351,7 @@ main,
 }
 .name {
   display: block;
-  font-size: clamp(46px, 9vw, 112px);
+  font-size: clamp(72px, 16vw, 184px);
 }
 .name .ch {
   display: inline-block;

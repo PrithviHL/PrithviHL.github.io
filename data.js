@@ -1,7 +1,7 @@
 // All site content lives here. Edit this file to update the portfolio.
 
 export const PROFILE = {
-  name: "Prithvi Halagere Lokesha",
+  name: "Prithvi",
   short: "Prithvi",
   headline:
     "Prev ML Engineer @ Aventusoft // taught AI to catch missing heartbeats | MS AI @ UF | Prev SWE @ Huron // kept Salesforce from breaking | Next up: building products people can trust",
