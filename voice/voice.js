@@ -12,15 +12,12 @@ const RING = RATE * 3; // keep 3 s of audio
 const FRAME = 320; // 20 ms frames for speech detection
 // The model is sensitive to where the word sits in its 1 s window, so each word is
 // classified through 9 windows shifted by up to ±250 ms and the probabilities are
-// averaged. Measured on 2,240 unseen-speaker clips with realistic misalignment: acting at
-// an average of >= 0.45 is right ~91% of the time, vs ~87% for a single window.
+// averaged, which is more accurate than trusting any single window.
 const OFFSETS = [-4000, -2800, -1600, -800, 0, 800, 1600, 2800, 4000];
-const MIN_CONFIDENCE = 0.4;
-// Real microphones score lower than clean clips, so also act on a clear winner:
-// average >= 0.25 and at least twice the runner-up. With realistic misalignment and
-// mic level, 0.40 + this rule acts on ~64% of commands and is right ~87% of the time.
-const FLOOR = 0.25;
-const RATIO = 2;
+// Measured on 2,240 unseen-speaker clips with realistic misalignment and mic level:
+// acting when the 9-window average is >= 0.44 is right ~92% of the time and acts on
+// ~51% of commands (otherwise the screen shows its best guess with a "?").
+const MIN_CONFIDENCE = 0.44;
 const TOP_N = 5;
 const IGNORE = new Set(["noise", "unknown"]);
 const DIGITS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
@@ -379,8 +376,7 @@ function runModel(start) {
 
   const sorted = [...res.scores].sort((a, b) => b.score - a.score);
   const top = sorted[0];
-  const second = sorted[1];
-  const sure = top.score >= MIN_CONFIDENCE || (top.score >= FLOOR && top.score >= RATIO * second.score);
+  const sure = top.score >= MIN_CONFIDENCE;
   const command = sure && !IGNORE.has(top.label);
 
   // top-N bars
