@@ -317,9 +317,9 @@ export const JOURNEY = [
   },
   {
     when: "2022 – 2023",
-    title: "Machine Learning Engineer",
+    title: "Machine Learning Engineer Intern",
     org: "YBI Foundation, Delhi",
-    text: "Applied machine learning engineering in Delhi.",
+    text: "Machine learning engineering internship.",
   },
   {
     when: "2019 – 2023",
