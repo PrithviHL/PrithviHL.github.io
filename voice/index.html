@@ -137,8 +137,8 @@
           <i>noise</i> and <i>unknown</i> classes. On speakers it never heard it is 74% accurate across all 28 classes,
           and the page looks at each word through 9 slightly shifted windows and averages them. It acts when the
           average is at least 44% (then it is right about 92% of the time); otherwise the screen shows its best guess
-          with a question mark. On the ESP32 it needs
-          12 ms, 22 KB of RAM and 72 KB of flash. Speak one command at a time; “turn on” works better than “on” alone.
+          with a question mark. On the ESP32 it takes
+          about 12 ms per inference and 22 KB of RAM (Edge Impulse’s estimate), in firmware of 461 KB. Speak one command at a time; “turn on” works better than “on” alone.
         </p>
       </section>
     </main>
