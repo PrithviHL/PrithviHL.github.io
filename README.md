@@ -38,3 +38,7 @@ because browsers block ES modules from `file://`.)
 ## Project descriptions updated — November 16, 2026
 
 LeaveNow reflects Gainesville RTS, direct-first trip recommendations, direction-verified live buses, address/GPS input, GTFS route shapes, and its current deployed branch. CodeAtlas distinguishes the hosted Groq app from the local experimental LangGraph engine and labels its development pilot. Existing design, contact details, other project entries, and the TinyML voice demo are preserved.
+
+## CodeAtlas evaluation documented
+
+The CodeAtlas card now links to the reproducible web evaluation and displays 96.6% exact-source recovery (281/291 parser-checked lookups), +16.2% MRR@10 for the AST + BM25 component on 5,000 queries, and 3.6 ms local retrieval p95 excluding HTTP and LLM generation. Its detail panel also reports the full web pipeline’s lower MRR and keeps local semantic embeddings distinct from the hosted hashed-vector pipeline.

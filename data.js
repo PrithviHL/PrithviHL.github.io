@@ -75,26 +75,29 @@ export const PROJECTS = [
     accent: "#19c48a",
     tagline: "Ask a codebase. Check the source.",
     summary:
-      "Natural-language Q&A over public GitHub repositories, with Groq answers and citations pinned to the indexed commit.",
+      "AST-aware Q&A over public GitHub repositories, with complete function/class evidence and commit-pinned citations.",
     details:
-      "Import a public repository, ask a question and inspect the cited source. The live app uses lightweight hybrid retrieval with Groq and an evidence fallback. A separate local LangGraph engine explores AST-aware chunks, BM25F, semantic embeddings, Qdrant, cross-encoder reranking and signed incremental webhooks; it is not connected to the hosted demo.",
+      "Import a public repository, ask a question and inspect the full matching function or class. The hosted TypeScript app combines AST-aware chunks, BM25 and hashed vectors with Groq answers and an explicit evidence fallback. Google OAuth protects temporary browser workspaces. Real semantic embeddings and Qdrant remain in a separate local LangGraph engine.",
+    note:
+      "The 16.2% gain measures AST + BM25 lexical retrieval against fixed-line chunks. The full web evidence path scored 0.260 MRR@10, below the 0.393 baseline. Exact-source recovery is not AI answer accuracy; latency is local and excludes HTTP and LLM generation.",
     highlights: [
-      "Expandable source excerpts with exact commit and line citations",
-      "Groq-generated answers with explicit evidence fallback",
-      "Google OAuth and isolated, temporary browser workspaces",
-      "Local engine: LangGraph, AST chunks, BM25F, embeddings and reranking",
-      "Local pilot: 12,027 lines, 2 repositories, 20 development queries—not a production-scale benchmark",
+      "281/291 exact source-body and line-span recoveries, checked with separate Python and TypeScript parsers",
+      "5,000 CodeSearchNet-derived test queries across five languages; 1,000 code candidates per language",
+      "Lexical component ablation: MRR@10 0.393 → 0.457 (+16.2%)",
+      "Complete named declarations, commit-pinned links and clear excerpt fallbacks",
+      "53 web + 10 engine tests passed; reproducible protocol and per-query results published",
     ],
     metrics: [
-      { value: "Groq", label: "hosted answer generation" },
-      { value: "Local", label: "experimental LangGraph engine" },
-      { value: "Commit", label: "pinned source citations" },
+      { value: "96.6%", label: "exact-source recovery · 291 lookups" },
+      { value: "+16.2%", label: "lexical MRR@10 · 5,000 queries" },
+      { value: "3.6 ms", label: "local retrieval p95 · no HTTP / LLM" },
     ],
-    stack: ["TypeScript", "Groq", "Python", "LangGraph (local)", "Qdrant (local)", "Render"],
-    flow: ["Public GitHub repo", "Temporary source index", "Hybrid evidence search", "Groq or evidence fallback", "Commit-pinned answer"],
+    stack: ["TypeScript", "Tree-sitter", "BM25", "Groq", "LangGraph (local)", "Qdrant (local)", "Render"],
+    flow: ["Public GitHub repo", "AST source snapshot", "Rank + resolve declaration", "Groq or evidence fallback", "Commit-pinned source"],
     links: {
       demo: "https://codeatlas-rag.onrender.com",
       code: "https://github.com/PrithviHL/rag-over-codebase/tree/feature/render-public-app",
+      evaluation: "https://github.com/PrithviHL/rag-over-codebase/blob/feature/render-public-app/code/ts/benchmarks/web-evaluation/README.md",
     },
   },
   {

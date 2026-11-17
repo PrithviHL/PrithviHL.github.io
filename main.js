@@ -235,6 +235,7 @@ function linkButtons(p) {
   if (p.links.demo) out.push(`<a class="btn btn-primary" href="${p.links.demo}" target="_blank" rel="noopener">▶ Try the live demo</a>`);
   if (p.links.video) out.push(`<a class="btn btn-primary" href="${p.links.video}" target="_blank" rel="noopener">▶ Watch the demo</a>`);
   if (p.links.code) out.push(`<a class="btn" href="${p.links.code}" target="_blank" rel="noopener">View the code</a>`);
+  if (p.links.evaluation) out.push(`<a class="btn" href="${p.links.evaluation}" target="_blank" rel="noopener">Read the evaluation</a>`);
   if (!out.length) out.push(`<span class="badge">Research / private code</span>`);
   return out.join("");
 }
