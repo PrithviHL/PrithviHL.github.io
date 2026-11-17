@@ -7,11 +7,12 @@ export const PROFILE = {
     "Prev ML Engineer @ Aventusoft // taught AI to catch missing heartbeats | MS AI @ UF | Prev SWE @ Huron // kept Salesforce from breaking | Next up: building products people can trust",
   roles: [
     "AI/ML Engineer",
+    "Software Engineer",
     "LLM systems builder",
     "Medical AI engineer",
     "RAG & evaluation nerd",
   ],
-  status: "Open to full-time ML / AI / Software Engineer roles · open to relocation",
+  status: "Open to full-time Software Engineer and ML / AI Engineer roles · open to relocation",
   about: [
     "I build production-minded AI systems: retrieval and LLM applications, evaluation and observability tooling, and deep learning for medical signals and images.",
     "Most recently I was a Machine Learning Engineer Intern at Aventusoft, shipping ECG deep learning models for arrhythmia classification and PQRST fiducial detection, exported to TensorFlow Lite and deployed on AWS SageMaker.",
