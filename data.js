@@ -45,10 +45,11 @@ export const PROJECTS = [
     accent: "#ff9f43",
     tagline: "The right bus. The simpler trip.",
     summary:
-      "Gainesville RTS trip planning with direct-first recommendations, direction-verified live tracking, and published route maps.",
+      "Gainesville RTS planning across 972 stops, with 3.1× sampled journey availability through one-transfer routing.",
     details:
-      "Search a Gainesville address, place or stop, or use device location. Official GTFS timetables power direct and one-transfer trips, with three distinct departure choices and the best selected first. Live GPS and boarding ETAs appear only when the required RTS data is available.",
+      "Search a Gainesville address, place or stop, or use device location. Official GTFS timetables power direct and one-transfer trips, with three distinct departure choices and the best selected first. Live GPS and boarding ETAs appear only when the required RTS data is available. A 60-search benchmark returned journeys for 49 cases with one transfer versus 16 direct-only; local routing measured 7.4 ms median and 31.3 ms p95 on an Apple M4 Pro with Node 24. Results cover one service-date sample and exclude HTTP, UI and live provider calls.",
     highlights: [
+      "27 routes, 3,321 GTFS trip definitions and 89,517 stop-time records",
       "Direct-first recommendations; redundant transfer variants grouped",
       "Live bus choices verify boarding-to-destination stop order",
       "Published route shapes, live GPS and clear Live / Scheduled labels",
@@ -57,13 +58,14 @@ export const PROJECTS = [
       "Google sign-in, server-only RTS key, Docker deployment and Kubernetes CI",
     ],
     metrics: [
-      { value: "3", label: "distinct trip recommendations" },
-      { value: "20s", label: "live tracking refresh when enabled" },
-      { value: "≤1", label: "transfer per journey" },
+      { value: "3.1×", label: "sampled journey availability (49/60 vs 16/60)" },
+      { value: "31.3 ms", label: "local routing p95 · 60 searches" },
+      { value: "972", label: "stops across 27 RTS routes" },
     ],
     stack: ["Python", "Streamlit", "Node.js", "GTFS", "BusTime v3", "Docker", "Render"],
     flow: ["Gainesville GTFS + BusTime", "Private Node API", "Rank direct / transfer trips", "Verify live bus direction", "Streamlit route map"],
     links: {
+      evaluation: "https://github.com/PrithviHL/LeaveNow-Real-Time-Bus-Location-Tracking-and-Smart-Departure-Prediction/blob/feature/streamlit-containers/benchmarks/routing/README.md",
       demo: "https://leavenow-prithvihl.onrender.com",
       code: "https://github.com/PrithviHL/LeaveNow-Real-Time-Bus-Location-Tracking-and-Smart-Departure-Prediction/tree/feature/streamlit-containers",
     },
