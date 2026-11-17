@@ -17,6 +17,7 @@ export const PROFILE = {
     "I build production-minded AI systems: retrieval and LLM applications, evaluation and observability tooling, and deep learning for medical signals and images.",
     "Most recently I was a Machine Learning Engineer Intern at Aventusoft, shipping ECG deep learning models for arrhythmia classification and PQRST fiducial detection, exported to TensorFlow Lite and deployed on AWS SageMaker.",
     "Before that I automated 120+ Salesforce test workflows as a software engineer in test. Turns out debugging humans is harder than debugging code.",
+    "Right now I'm building LeaveNow, a real-time bus planner for Gainesville RTS with live GPS and one-transfer routing.",
   ],
   stats: [
     { value: 94, suffix: "%", label: "accuracy detecting heart conditions" },
@@ -130,6 +131,7 @@ export const PROJECTS = [
     links: {
       demo: "https://spanscope-llm-observability-dashboard.onrender.com/",
       code: "https://github.com/PrithviHL/Spanscope-LLM-observability-dashboard",
+      evaluation: "https://github.com/PrithviHL/Spanscope-LLM-observability-dashboard#performance-and-accuracy",
     },
   },
   {
@@ -161,6 +163,7 @@ export const PROJECTS = [
       demo: "voice/",
       video: "https://drive.google.com/drive/folders/1DJyjVCoRY8r977VBq4hr7fjYT17MtLwN?usp=sharing",
       code: "https://github.com/PrithviHL/SayWatt-Real-Time-Voice-Command-Recognition-on-ESP32",
+      evaluation: "https://github.com/PrithviHL/SayWatt-Real-Time-Voice-Command-Recognition-on-ESP32#how-well-it-works",
     },
   },
   {
