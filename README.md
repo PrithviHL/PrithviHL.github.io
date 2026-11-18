@@ -42,3 +42,7 @@ LeaveNow reflects Gainesville RTS, direct-first trip recommendations, direction-
 ## CodeAtlas evaluation documented
 
 The CodeAtlas card now links to the reproducible web evaluation and displays 96.6% exact-source recovery (281/291 parser-checked lookups), +16.2% MRR@10 for the AST + BM25 component on 5,000 queries, and 3.6 ms local retrieval p95 excluding HTTP and LLM generation. Its detail panel also reports the full web pipeline’s lower MRR and keeps local semantic embeddings distinct from the hosted hashed-vector pipeline.
+
+## LeaveNow OSM rollout — November 18, 2026
+
+The project card and detail flow now describe bundled Gainesville OSM walking A*, combined stop/address autocomplete, conservative connection checks, and labelled fallback estimates. Historical availability/latency metrics are explicitly marked pre-OSM. The rollout passed 94 tests and both remote workflows; hosted startup verified mapped access walks. [Implementation, licensing, coverage and deployment evidence](https://github.com/PrithviHL/LeaveNow-Real-Time-Bus-Location-Tracking-and-Smart-Departure-Prediction/blob/feature/streamlit-containers/docs/walking-routing.md).
