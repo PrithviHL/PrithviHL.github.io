@@ -1,0 +1,126 @@
+{
+  "schema": 1,
+  "project": "LeaveNow",
+  "recordedDate": "2026-11-18",
+  "testedCodeCommit": "732ef01fb53cf314f2963780092c6cc5f2f339a5",
+  "appUrl": "https://leavenow-prithvihl.onrender.com",
+  "portfolioUrl": "https://prithvihl.github.io/#project/leavenow",
+  "canonicalDocumentation": "https://github.com/PrithviHL/LeaveNow-Real-Time-Bus-Location-Tracking-and-Smart-Departure-Prediction/blob/feature/streamlit-containers/docs/project-metrics.md",
+  "auditUrl": "https://github.com/PrithviHL/LeaveNow-Real-Time-Bus-Location-Tracking-and-Smart-Departure-Prediction/blob/feature/streamlit-containers/benchmarks/timing/README.md",
+  "automatedTests": {
+    "node": 77,
+    "python": 50,
+    "total": 127,
+    "failures": 0,
+    "scope": "Clean committed release; scenario loops below are nested within these tests."
+  },
+  "generatedScenarios": {
+    "walkingOraclePairs": 1296,
+    "predictionEvidenceCombinations": 128,
+    "delayedTransferCases": 600,
+    "seed": 20261118,
+    "scope": "Generated correctness checks, not independently observed arrivals or timed pedestrian walks."
+  },
+  "currentFeedRun": {
+    "verifiedAt": "2026-11-18T20:50:30.494Z",
+    "serviceDate": "20261118",
+    "clock": 1795031400000,
+    "feedSource": "https://go-rts.com/wp-content/uploads/2026/08/RTSGTFS_Fall2026-1.zip",
+    "sourceZipSha256": "b273632dde42ba6dee2b3a9cb9d0b802f60d18917d90016f3ff5faa9ce64420f",
+    "walkingGraphSha256": "9e1709ae845be64387d9973c712cb18fb29ad3f0e566dcbf776a99a0ef20e4bd",
+    "stops": 972,
+    "trips": 3321,
+    "searches": 120,
+    "candidateJourneys": 2428,
+    "transferJourneys": 31,
+    "routedWalks": 4887,
+    "estimatedWalks": 0,
+    "invariantFailures": 0,
+    "localLatencyMs": {
+      "p50": 16.766542000000072,
+      "p95": 62.54495900000006,
+      "max": 74.93545799999993
+    },
+    "rssBytes": 265109504
+  },
+  "runtime": {
+    "node": "v24.22.1",
+    "heapOldSpaceMiB": 160,
+    "heapSemiSpaceMiB": 4,
+    "scope": "Local routing only; excludes HTTP, UI and live provider calls; hardware not collected in this run."
+  },
+  "walkingGraph": {
+    "vertices": 171202,
+    "segments": 190432,
+    "compressedBytes": 2625095,
+    "paceMetersPerMinute": 65,
+    "crossingSeconds": 15,
+    "license": "ODbL-1.0"
+  },
+  "boardingPolicy": {
+    "defaultApproachBufferMinutes": 2,
+    "atStopBufferMinutes": 0,
+    "atStopThresholdMeters": 1,
+    "requiresZeroWalk": true,
+    "transferBuffersUnchanged": true
+  },
+  "tracking": {
+    "uiRefreshSeconds": 5,
+    "vehicleCacheSeconds": 5,
+    "predictionCacheSeconds": 15,
+    "identity": "Exact GTFS trip/service date, or unique exact scheduled-start/route/full-stop-sequence mapping; no route-only substitution."
+  },
+  "hostedObservation": {
+    "codeCommit": "732ef01",
+    "memorySamplesBytes": [
+      193179650,
+      182272000,
+      182296580
+    ],
+    "sampleUtc": [
+      "2026-11-18T20:52:00Z",
+      "2026-11-18T20:53:00Z",
+      "2026-11-18T20:54:00Z"
+    ],
+    "configuredLimitMiB": 512,
+    "scope": "Post-startup samples, not peak capacity or a load test. Earlier boarding snapshot consistency is recorded separately in live-check.json."
+  },
+  "ci": {
+    "codeCommit": "732ef01",
+    "continuousIntegration": "passed",
+    "containersAndKubernetes": "passed",
+    "runs": [
+      "https://github.com/PrithviHL/LeaveNow-Real-Time-Bus-Location-Tracking-and-Smart-Departure-Prediction/actions/runs/44395294965",
+      "https://github.com/PrithviHL/LeaveNow-Real-Time-Bus-Location-Tracking-and-Smart-Departure-Prediction/actions/runs/44395294970"
+    ]
+  },
+  "historicalRuns": [
+    {
+      "phase": "initial OSM rollout",
+      "tests": 94
+    },
+    {
+      "phase": "timing audit before zero at-stop buffer",
+      "tests": 122,
+      "candidateJourneys": 2426,
+      "transferJourneys": 34,
+      "routedWalks": 4886,
+      "artifact": "benchmarks/timing/report.json"
+    },
+    {
+      "phase": "pre-OSM 60-search sample",
+      "availabilityRatio": 3.1,
+      "directResults": 16,
+      "transferResults": 49,
+      "localMedianMs": 7.4,
+      "localP95Ms": 31.3,
+      "artifact": "benchmarks/routing/README.md"
+    }
+  ],
+  "limitations": [
+    "Actual bus arrival MAE, signed bias and p90 error are unmeasured: no independently observed arrival dataset.",
+    "Walking accuracy is unmeasured: no timed pedestrian ground truth.",
+    "One-date generated searches do not establish citywide coverage, global optimality or guaranteed connections.",
+    "Render hosts a Docker service; Kubernetes is tested locally/in CI. AWS EKS/DynamoDB are not deployed."
+  ]
+}

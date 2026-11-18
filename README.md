@@ -46,3 +46,7 @@ The CodeAtlas card now links to the reproducible web evaluation and displays 96.
 ## LeaveNow OSM rollout — November 18, 2026
 
 The project card and detail flow now describe bundled Gainesville OSM walking A*, combined stop/address autocomplete, conservative connection checks, and labelled fallback estimates. Historical availability/latency metrics are explicitly marked pre-OSM. The rollout passed 94 tests and both remote workflows; hosted startup verified mapped access walks. [Implementation, licensing, coverage and deployment evidence](https://github.com/PrithviHL/LeaveNow-Real-Time-Bus-Location-Tracking-and-Smart-Departure-Prediction/blob/feature/streamlit-containers/docs/walking-routing.md).
+
+## Current LeaveNow verification — November 18, 2026
+
+The current card presents 127 tests, 1,296 generated walking-oracle pairs, and 120 generated real-feed searches. Details report 2,428 candidate journeys and zero invariant failures without implying measured forecast accuracy. [Versioned evidence](https://github.com/PrithviHL/LeaveNow-Real-Time-Bus-Location-Tracking-and-Smart-Departure-Prediction/blob/feature/streamlit-containers/docs/project-metrics.md) includes the at-stop buffer exception, exact-trip tracking, live destination provenance, camera preservation, raw runs, local latency, hosted memory samples and older baseline metrics. The synchronized [JSON snapshot](metrics/leavenow.json) keeps version and scope attached to every number.
