@@ -246,48 +246,35 @@ function openProject(id, push = true) {
   lastFocus = document.activeElement;
   const vertical = innerWidth < 720;
   panel.style.setProperty("--accent", p.accent);
-  const featuredMetric = p.metrics[0];
-  const implementation = p.implementation ?? p.flow.map((title) => ({ title }));
   panel.innerHTML = `
     <button class="modal-close" data-close aria-label="Close">×</button>
-    <section class="m-head project-overview" aria-labelledby="modal-title">
-      <div class="project-intro">
-        <p class="project-label">What it does</p>
-        <h2 id="modal-title">${esc(p.title)}</h2>
-        <p class="tagline">${esc(p.tagline)}</p>
-        <p>${esc(p.details)}</p>
-        ${p.note ? `<blockquote class="m-note">${esc(p.note)}</blockquote>` : ""}
-        <div class="chips project-stack">${p.stack.map((s) => `<span class="chip">${esc(s)}</span>`).join("")}</div>
-      </div>
-      <div class="project-scene" aria-hidden="true">
-        <div class="project-orbit project-orbit-one"></div>
-        <div class="project-orbit project-orbit-two"></div>
-        <div class="project-object">
-          <div class="project-layer project-layer-back"></div>
-          <div class="project-layer project-layer-middle"></div>
-          <div class="project-layer project-layer-front">${esc(initials(p.title))}</div>
-        </div>
-      </div>
-    </section>
-    <section class="m-section project-chapter" aria-labelledby="project-example-title">
-      <h3 id="project-example-title">See an example</h3>
-      ${p.example ? `<dl class="project-example"><div><dt>Input</dt><dd>${esc(p.example.input)}</dd></div><div><dt>Output</dt><dd>${esc(p.example.output)}</dd></div></dl>`
-        : `<p class="project-evidence">${esc(p.highlights[0] ?? p.summary)}</p>`}
-      ${featuredMetric ? `<div class="metrics">${p.metrics
-        .map((m, i) => `<div class="metric" style="--i:${i}"><b>${esc(m.value)}</b><span>${esc(m.label)}</span></div>`)
-        .join("")}</div>` : ""}
+    <header class="m-head">
+      <p class="tagline">${esc(p.tagline)}</p>
+      <h2 id="modal-title">${esc(p.title)}</h2>
+      <p>${esc(p.details)}</p>
+      ${p.note ? `<blockquote class="m-note">${esc(p.note)}</blockquote>` : ""}
       <div class="m-links">${linkButtons(p)}</div>
+    </header>
+    <section class="m-section">
+      <h3>Results</h3>
+      <div class="metrics">${p.metrics
+        .map((m, i) => `<div class="metric" style="--i:${i}"><b>${esc(m.value)}</b><span>${esc(m.label)}</span></div>`)
+        .join("")}</div>
     </section>
-    <section class="m-section project-chapter" aria-labelledby="project-implementation-title">
-      <h3 id="project-implementation-title">How to implement it</h3>
+    <section class="m-section">
+      <h3>How it flows</h3>
       <div class="flow">${flowSvg(p.flow, vertical)}</div>
-      <ol class="project-steps">${implementation.map((step) => `<li><h4>${esc(step.title)}</h4>
-        ${step.text ? `<p>${esc(step.text)}</p>` : ""}
-        ${step.command ? `<pre><code>${esc(step.command)}</code></pre>` : ""}
-      </li>`).join("")}</ol>
-      ${p.links.code ? `<a class="btn" href="${p.links.code}" target="_blank" rel="noopener">Repository and setup instructions</a>` : ""}
-      ${!p.implementation && !p.links.code ? `<p class="project-evidence">The architecture above summarizes the implementation. Source code is private.</p>` : ""}
+      <p class="flow-caption">Data moves left to right through each stage.</p>
+    </section>
+    <section class="m-section">
+      <h3>Highlights</h3>
+      <ul class="highlights">${p.highlights.map((h) => `<li>${esc(h)}</li>`).join("")}</ul>
+    </section>
+    <section class="m-section">
+      <h3>Stack</h3>
+      <div class="chips">${p.stack.map((s) => `<span class="chip">${esc(s)}</span>`).join("")}</div>
     </section>`;
+  if (vertical) $(".flow-caption", panel).textContent = "Data moves top to bottom through each stage.";
   modal.hidden = false;
   document.body.style.overflow = "hidden";
   panel.scrollTop = 0;
