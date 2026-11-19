@@ -22,7 +22,7 @@ export const PROFILE = {
   stats: [
     { value: 94, suffix: "%", label: "accuracy detecting heart conditions" },
     { value: 120, suffix: "+", label: "Salesforce test workflows automated" },
-    { value: 4, suffix: "", label: "live apps you can try today" },
+    { value: 5, suffix: "", label: "live apps you can try today" },
   ],
   links: {
     linkedin: "https://www.linkedin.com/in/prithvihl/",
@@ -66,6 +66,12 @@ export const PROJECTS = [
       { value: "1,296", label: "generated walking routes checked against Dijkstra" },
       { value: "120", label: "generated real-feed searches · one service date" },
     ],
+    example: { input: "Choose an origin and destination in Gainesville.", output: "Compare direct and one-transfer journeys, then track the assigned bus when its trip can be verified." },
+    implementation: [
+      { title: "Load transit and street data", text: "Use Gainesville RTS GTFS schedules, BusTime vehicle updates, and the local OpenStreetMap walking graph." },
+      { title: "Build and rank candidate trips", text: "Calculate walking legs with A*, combine direct and feasible transfer options, and apply the boarding and transfer rules." },
+      { title: "Track the selected trip", text: "Match the vehicle to the exact trip and service date. Show a downstream ETA only after verifying route direction and stop evidence." },
+    ],
     stack: ["Python", "Streamlit", "Node.js", "GTFS", "BusTime v3", "OpenStreetMap", "A*", "Docker", "Render"],
     flow: ["Gainesville GTFS + BusTime", "Private Node API", "Local OSM walking A*", "Rank direct / transfer trips", "Match exact trip + verify direction", "Live map + sourced ETAs"],
     links: {
@@ -98,6 +104,12 @@ export const PROJECTS = [
       { value: "+16.2%", label: "lexical MRR@10 · 5,000 queries" },
       { value: "3.6 ms", label: "local retrieval p95 · no HTTP / LLM" },
     ],
+    example: { input: "Import a public GitHub repository and ask where a feature is implemented.", output: "Inspect the matching function or class and follow the citation to the exact source commit." },
+    implementation: [
+      { title: "Snapshot the repository", text: "Import a public repo at a specific commit and parse its code into declarations." },
+      { title: "Retrieve evidence", text: "Rank AST-aware chunks with BM25 and hashed vectors, then resolve matches to complete functions or classes." },
+      { title: "Answer with citations", text: "Pass retrieved code to Groq and link to the source commit. Show evidence directly when an answer is unavailable." },
+    ],
     stack: ["TypeScript", "Tree-sitter", "BM25", "Groq", "LangGraph (local)", "Qdrant (local)", "Render"],
     flow: ["Public GitHub repo", "AST source snapshot", "Rank + resolve declaration", "Groq or evidence fallback", "Commit-pinned source"],
     links: {
@@ -127,6 +139,12 @@ export const PROJECTS = [
       { value: "52.7k", label: "spans/s into ClickHouse" },
       { value: "436k", label: "spans/s in memory" },
       { value: "88%", label: "precision of toxicity flags, 860 unseen tweets" },
+    ],
+    example: { input: "Run the incident simulator to generate traces with elevated errors and latency.", output: "Inspect trace details and compare errors, latency, and request cost across models." },
+    implementation: [
+      { title: "Instrument a client", text: "Configure an OpenTelemetry GenAI SDK to send OTLP/HTTP JSON spans to /v1/traces." },
+      { title: "Validate and store spans", text: "Extract model and token attributes, calculate costs, and store events in memory or ClickHouse." },
+      { title: "Build the dashboard", text: "Query aggregates for latency percentiles, error rate, and model cost. Link aggregate views to individual traces." },
     ],
     stack: ["TypeScript", "Hono", "ClickHouse", "OpenTelemetry", "Python", "Docker", "GitHub Actions"],
     flow: ["LLM app + OTel SDK", "/v1/traces ingest", "Validate & price", "Memory or ClickHouse", "Live dashboard"],
@@ -159,6 +177,12 @@ export const PROJECTS = [
       { value: "92%", label: "precision when it acts" },
       { value: "0%", label: "false triggers on background noise" },
     ],
+    example: { input: "Say “turn on” in the browser demo.", output: "The deployed keyword model recognizes the command and updates the simulated device on your screen." },
+    implementation: [
+      { title: "Collect and prepare audio", text: "Use labeled Speech Commands clips and synthetic voices. Keep speakers separate across training and evaluation splits." },
+      { title: "Train and export the model", text: "Extract MFCC features, train the keyword classifier in Edge Impulse, and export it as an int8 model." },
+      { title: "Connect inference to actions", text: "Run the model on ESP32 microphone input or compile the same C++ pipeline to WebAssembly. Map confident detections to commands." },
+    ],
     stack: ["C++", "Edge Impulse", "TensorFlow Lite Micro", "ESP32", "Python", "WebAssembly", "Docker"],
     flow: ["INMP441 mic", "250 ms slices", "MFCC 13×66", "int8 CNN, 28 classes", "Light · blinds · OLED"],
     links: {
@@ -188,6 +212,16 @@ export const PROJECTS = [
       { value: "8", label: "workflow nodes" },
       { value: "2", label: "task-specific model calls" },
       { value: "1", label: "form submission" },
+    ],
+    example: {
+      input: "A fictional data analyst supplies a PDF resume, a job description that prioritizes SQL reporting, and two hiring-team names.",
+      output: "The Word draft emphasizes a source-backed reporting achievement. Two first-person outreach drafts connect that experience to the role.",
+    },
+    implementation: [
+      { title: "Start the local services", text: "Install Git, Docker Desktop, and Ollama. Open Docker Desktop and Ollama, then run these commands.", command: "git clone https://github.com/PrithviHL/rolecraft.git\ncd rolecraft\nollama pull qwen2.5:3b\ndocker compose up -d" },
+      { title: "Import the workflow", text: "Open localhost:5678, create a workflow, and choose Import from File. Select recruiting-workflow.json and save the workflow." },
+      { title: "Run an application", text: "Click Execute workflow and open the test form. Upload a text-based resume PDF, paste the job description, and enter the hiring-team names." },
+      { title: "Review the output", text: "Open the downloaded Word resume and outreach drafts. Check the factual claims and edit the messages before sending them." },
     ],
     stack: ["n8n", "Ollama", "Qwen2.5", "JavaScript", "Docker", "Render"],
     flow: ["Application form", "PDF extraction", "Local Ollama drafts", "JSON validation", "Resume and outreach"],
