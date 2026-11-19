@@ -173,15 +173,15 @@ export const PROJECTS = [
     title: "RoleCraft",
     category: "systems",
     accent: "#32c9a4",
-    tagline: "Local AI for resume tailoring and hiring outreach",
+    tagline: "Local Word resume tailoring and hiring outreach",
     summary:
-      "One form takes a resume PDF, job description, and hiring-team names and produces a tailored Word resume and outreach drafts for review.",
+      "Upload an editable DOCX, add a job description and hiring-team names, and get one ZIP with a tailored Word resume, outreach drafts, and review notes.",
     details:
-      "An eight-node n8n workflow extracts PDF text and sends two schema-guided requests to a local Ollama model. One tailors the resume to the job description using source-backed claims. The other drafts messages for the named hiring-team contacts. JavaScript validates the responses and builds the downloadable files. The public Render demo uses fictional sample data.",
+      "An eight-node n8n workflow uses a local Python service to edit the original Word template, prioritizing matching skills and ranking existing experience bullets and projects while preserving headings, indentation, links, and verified claims. Two structured Ollama calls generate role metadata, review notes, and outreach drafts. The public Render demo includes a complete fictional sample ZIP.",
     highlights: [
       "Local Ollama inference for real applications",
-      "Separate prompts for factual resume rewriting and personalized outreach",
-      "Structured JSON validation and editable Word export",
+      "DOCX-only upload with the original Word styles and source wording preserved",
+      "One ZIP with the editable Word resume, outreach drafts, and review notes",
       "Human review before sending outreach",
     ],
     metrics: [
@@ -189,8 +189,8 @@ export const PROJECTS = [
       { value: "2", label: "task-specific model calls" },
       { value: "1", label: "form submission" },
     ],
-    stack: ["n8n", "Ollama", "Qwen2.5", "JavaScript", "Docker", "Render"],
-    flow: ["Application form", "PDF extraction", "Local Ollama drafts", "JSON validation", "Resume and outreach"],
+    stack: ["n8n", "Ollama", "Qwen2.5", "Python", "JavaScript", "Docker", "Render"],
+    flow: ["DOCX form", "Word template tailoring", "Local Ollama drafts", "Validation", "Application ZIP"],
     links: {
       demo: "https://rolecraft-atr5.onrender.com/",
       code: "https://github.com/PrithviHL/rolecraft",
