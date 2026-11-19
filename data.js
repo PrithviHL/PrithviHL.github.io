@@ -169,6 +169,34 @@ export const PROJECTS = [
     },
   },
   {
+    id: "rolecraft",
+    title: "RoleCraft",
+    category: "systems",
+    accent: "#32c9a4",
+    tagline: "Local AI for resume tailoring and hiring outreach",
+    summary:
+      "One form takes a resume PDF, job description, and hiring-team names and produces a tailored Word resume and outreach drafts for review.",
+    details:
+      "An eight-node n8n workflow extracts PDF text and sends two schema-guided requests to a local Ollama model. One tailors the resume to the job description using source-backed claims. The other drafts messages for the named hiring-team contacts. JavaScript validates the responses and builds the downloadable files. The public Render demo uses fictional sample data.",
+    highlights: [
+      "Local Ollama inference for real applications",
+      "Separate prompts for factual resume rewriting and personalized outreach",
+      "Structured JSON validation and editable Word export",
+      "Human review before sending outreach",
+    ],
+    metrics: [
+      { value: "8", label: "workflow nodes" },
+      { value: "2", label: "task-specific model calls" },
+      { value: "1", label: "form submission" },
+    ],
+    stack: ["n8n", "Ollama", "Qwen2.5", "JavaScript", "Docker", "Render"],
+    flow: ["Application form", "PDF extraction", "Local Ollama drafts", "JSON validation", "Resume and outreach"],
+    links: {
+      demo: "https://rolecraft-atr5.onrender.com/",
+      code: "https://github.com/PrithviHL/rolecraft",
+    },
+  },
+  {
     id: "beatnet",
     title: "BeatNet ECG Pipeline",
     category: "medical",
