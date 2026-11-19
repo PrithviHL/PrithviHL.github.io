@@ -22,7 +22,7 @@ export const PROFILE = {
   stats: [
     { value: 94, suffix: "%", label: "accuracy detecting heart conditions" },
     { value: 120, suffix: "+", label: "Salesforce test workflows automated" },
-    { value: 4, suffix: "", label: "live apps you can try today" },
+    { value: 5, suffix: "", label: "projects you can try today" },
   ],
   links: {
     linkedin: "https://www.linkedin.com/in/prithvihl/",
